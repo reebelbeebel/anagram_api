@@ -85,11 +85,10 @@ inputButton.onclick = e => {
           }
           return true;
         }
-
+        
         const resFunc = checkForMatches(wordSet, answerSet);
         
-
-        if (resFunc === true && doubleWord === false) {
+        if (resFunc === true && doubleWord === false && input.length >= 3) {
           levelAnswers.push(input);
 
           let list = document.createElement("li") // создаем элементы списка
@@ -121,6 +120,10 @@ inputButton.onclick = e => {
       // проверяем слово на наличие в массиве 
       if (doubleWord === true) {
           emptyWar("Такое слово уже есть!")
+        }
+
+        if (input.length < 3) {
+          emptyWar("Слово должно быть длинее двух букв!")
         }
     });
 
