@@ -10,7 +10,7 @@ const wordMain = [
   "положение", "управление", "материал"
 ];
 
-const spisok = document.querySelector(".spisokul")
+const listEl = document.querySelector(".spisokul")
 const formEl = document.querySelector(".forma");
 const word = document.querySelector(".main_word");
 const inputWords = document.querySelector(".words");
@@ -38,7 +38,7 @@ nextWord.onclick = e => {
   word.textContent = wordMain[countWord];
   levelAnswers = []; // Очищаем массив для следующего слова
   nextWordButtonFunc("hidden")
-  spisok.textContent = "";
+  listEl.textContent = "";
   inputWords.focus();
 };
 
@@ -92,7 +92,7 @@ inputButton.onclick = e => {
           levelAnswers.push(input);
 
           let list = document.createElement("li") // создаем элементы списка
-          spisok.append(list);
+          listEl.append(list);
           list.setAttribute('class', 'mr-8 mt-8 text-xl text-white');
           list.textContent = `${input}`; // добавляем слово в список, прошедшее проверку
           loadingAndAnswer("hidden", "#00FF00"); // вызов функции изменения цвета и видимости оповещения
