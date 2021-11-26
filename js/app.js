@@ -24,7 +24,19 @@ const loadingPart = document.querySelector(".three");
 function nextWordButtonFunc(visibility) {
   nextWord.style.visibility = visibility;
 }
-nextWordButtonFunc("hidden");// прячем кнопку след слова
+
+// Функция ответа юзеру
+function emptyWar(string) {
+  answerToUser.textContent = string;
+}
+
+// Функция изменения видимости и цвета оповещения
+function loadingAndAnswer(visibility, color) {
+  loadingPart.style.visibility = visibility;
+  answerToUser.style.color = color;
+}
+
+nextWordButtonFunc("hidden"); // прячем кнопку след слова
 
 loadingPart.style.visibility = "hidden";
 
@@ -44,17 +56,6 @@ nextWord.onclick = e => {
 
 word.textContent = wordMain[countWord];
 inputWords.focus();
-
-// Функция ответа юзеру
-function emptyWar(string) {
-  answerToUser.textContent = string;
-}
-
-// Функция изменения видимости и цвета оповещения
-function loadingAndAnswer(visibility, color) {
-  loadingPart.style.visibility = visibility;
-  answerToUser.style.color = color;
-}
 
 // Рабта с кнопкой 'Принять'
 inputButton.onclick = e => {
@@ -88,7 +89,7 @@ inputButton.onclick = e => {
         
         const resFunc = checkForMatches(wordSet, answerSet);
         
-        if (resFunc === true && doubleWord === false && input.length >= 3) {
+        if (resFunc && !doubleWord && input.length >= 3) {
           levelAnswers.push(input);
 
           let list = document.createElement("li") // создаем элементы списка
@@ -118,12 +119,12 @@ inputButton.onclick = e => {
       }
 
       // проверяем слово на наличие в массиве 
-      if (doubleWord === true) {
+      if (doubleWord) {
           emptyWar("Такое слово уже есть!")
         }
 
         if (input.length < 3) {
-          emptyWar("Слово должно быть длинее двух букв!")
+          emptyWar("Не менее трёх букв!")
         }
     });
 
