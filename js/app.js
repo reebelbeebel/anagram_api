@@ -48,18 +48,13 @@ nextWord.onclick = e => {
   e.preventDefault();
   countWord++;
   word.textContent = wordMain[countWord];
-  localStorage.setItem('word', wordMain[countWord])
-  if (wordMain[countWord] === localStorage.getItem('word')) {
-    word.textContent = localStorage.getItem('word');
-  };
-  console.log(localStorage.getItem('word'));
   levelAnswers = []; // Очищаем массив для следующего слова
   nextWordButtonFunc("hidden")
   listEl.textContent = "";
   inputWords.focus();
 };
 
-word.textContent = localStorage.getItem('word');
+word.textContent = wordMain[countWord];
 inputWords.focus();
 
 // Рабта с кнопкой 'Принять'
@@ -80,7 +75,7 @@ inputButton.onclick = e => {
       console.log(data[0]);
 
       if (data[0] === undefined) {
-        const wordSet = new Set(localStorage.getItem('word'));
+        const wordSet = new Set(wordMain[countWord]);
         const answerSet = new Set(input);
 
         function checkForMatches(set, subset) {
