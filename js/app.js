@@ -10,8 +10,8 @@ const wordMain = [
   "положение", "управление", "материал"
 ];
 
-const listEl = document.querySelector(".spisokul")
-const formEl = document.querySelector(".forma");
+const listEl = document.querySelector(".list_part");
+const formEl = document.querySelector(".form");
 const word = document.querySelector(".main_word");
 const inputWords = document.querySelector(".words");
 const inputButton = document.querySelector(".btn_input");
@@ -48,13 +48,18 @@ nextWord.onclick = e => {
   e.preventDefault();
   countWord++;
   word.textContent = wordMain[countWord];
+  localStorage.setItem('word', wordMain[countWord])
+  if (wordMain[countWord] === localStorage.getItem('word')) {
+    word.textContent = localStorage.getItem('word');
+  };
+  console.log(localStorage.getItem('word'));
   levelAnswers = []; // Очищаем массив для следующего слова
   nextWordButtonFunc("hidden")
   listEl.textContent = "";
   inputWords.focus();
 };
 
-word.textContent = wordMain[countWord];
+word.textContent = localStorage.getItem('word');
 inputWords.focus();
 
 // Рабта с кнопкой 'Принять'
@@ -75,7 +80,7 @@ inputButton.onclick = e => {
       console.log(data[0]);
 
       if (data[0] === undefined) {
-        const wordSet = new Set(wordMain[countWord]);
+        const wordSet = new Set(localStorage.getItem('word'));
         const answerSet = new Set(input);
 
         function checkForMatches(set, subset) {
