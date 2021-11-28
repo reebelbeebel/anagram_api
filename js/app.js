@@ -43,13 +43,11 @@ loadingPart.style.visibility = "hidden";
 let countWord = 0; // счетчик главных слов
 let levelAnswers = []; // массив с введенными ответами, очищать после левела
 
-startButton.onclick = e => {
-  e.preventDefault();
+window.onload = function() {
   word.textContent = wordMain[countWord];
   inputWords.focus();
-  startButton.style.visibility = "hidden";
   localStorage.setItem('word', wordMain[countWord]);
-}
+};
 
 // Работа с кнопкой 'Next'
 nextWord.onclick = e => {
@@ -66,7 +64,7 @@ nextWord.onclick = e => {
 if (typeof localStorage.getItem('word') === 'string') {
   word.textContent = localStorage.getItem('word');
   countWord = wordMain.indexOf(localStorage.getItem('word'));
-  startButton.style.visibility = "hidden";
+  // startButton.style.visibility = "hidden";
   inputWords.focus();
 }
 
