@@ -10,7 +10,6 @@ const wordMain = [
   "положение", "управление", "материал"
 ];
 
-const startButton = document.querySelector(".btn_enter");
 const listEl = document.querySelector(".list_part");
 const formEl = document.querySelector(".form");
 const word = document.querySelector(".main_word");
@@ -64,7 +63,6 @@ nextWord.onclick = e => {
 if (typeof localStorage.getItem('word') === 'string') {
   word.textContent = localStorage.getItem('word');
   countWord = wordMain.indexOf(localStorage.getItem('word'));
-  // startButton.style.visibility = "hidden";
   inputWords.focus();
 }
 
