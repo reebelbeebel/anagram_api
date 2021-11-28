@@ -38,7 +38,6 @@ function loadingAndAnswer(visibility, color) {
 }
 
 nextWordButtonFunc("hidden"); // прячем кнопку след слова
-
 loadingPart.style.visibility = "hidden";
 
 let countWord = 0; // счетчик главных слов
@@ -46,19 +45,17 @@ let levelAnswers = []; // массив с введенными ответами,
 
 startButton.onclick = e => {
   e.preventDefault();
-  
   word.textContent = wordMain[countWord];
   inputWords.focus();
   startButton.style.visibility = "hidden";
-  localStorage.setItem("word", wordMain[countWord]);
+  localStorage.setItem('word', wordMain[countWord]);
 }
 
 // Работа с кнопкой 'Next'
 nextWord.onclick = e => {
   e.preventDefault();
   countWord++;
-  console.log(countWord)
-  localStorage.setItem("word", wordMain[countWord]);
+  localStorage.setItem('word', wordMain[countWord]);
   word.textContent = wordMain[countWord];
   levelAnswers = []; // Очищаем массив для следующего слова
   nextWordButtonFunc("hidden")
@@ -66,9 +63,9 @@ nextWord.onclick = e => {
   inputWords.focus();
 };
 
-if (typeof localStorage.getItem("word") === 'string') {
-  word.textContent = localStorage.getItem("word");
-  countWord = wordMain.indexOf(localStorage.getItem("word"));
+if (typeof localStorage.getItem('word') === 'string') {
+  word.textContent = localStorage.getItem('word');
+  countWord = wordMain.indexOf(localStorage.getItem('word'));
   startButton.style.visibility = "hidden";
   inputWords.focus();
 }
@@ -90,8 +87,8 @@ inputButton.onclick = e => {
     .then((data) => {
       console.log(data[0]);
 
-      if (data[0] === undefined && typeof localStorage.getItem("word") === 'string') {
-        const wordSet = new Set(localStorage.getItem("word"));
+      if (data[0] === undefined && typeof localStorage.getItem('word') === 'string') {
+        const wordSet = new Set(localStorage.getItem('word'));
         const answerSet = new Set(input);
 
         function checkForMatches(set, subset) {
@@ -102,9 +99,9 @@ inputButton.onclick = e => {
           }
           return true;
         }
-        
+
         const resFunc = checkForMatches(wordSet, answerSet);
-        
+
         if (resFunc && !doubleWord && input.length >= 3) {
           levelAnswers.push(input);
 
@@ -136,12 +133,12 @@ inputButton.onclick = e => {
 
       // проверяем слово на наличие в массиве 
       if (doubleWord) {
-          emptyWar("Такое слово уже есть!")
-        }
+        emptyWar("Такое слово уже есть!")
+      }
 
-        if (input.length < 3) {
-          emptyWar("Не менее трёх букв!")
-        }
+      if (input.length < 3) {
+        emptyWar("Не менее трёх букв!")
+      }
     });
 
   if (levelAnswers.length >= 3) {
