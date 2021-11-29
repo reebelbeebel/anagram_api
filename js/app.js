@@ -60,9 +60,11 @@ nextWord.onclick = e => {
   inputWords.focus();
 };
 
-if (typeof localStorage.getItem('word') === 'string') {
-  word.textContent = localStorage.getItem('word');
-  countWord = wordMain.indexOf(localStorage.getItem('word'));
+const storageValue = localStorage.getItem('word');
+
+if (storageValue) {
+  word.textContent = storageValue;
+  countWord = wordMain.indexOf(storageValue);
   inputWords.focus();
 }
 
@@ -83,8 +85,8 @@ inputButton.onclick = e => {
     .then((data) => {
       console.log(data[0]);
 
-      if (data[0] === undefined && typeof localStorage.getItem('word') === 'string') {
-        const wordSet = new Set(localStorage.getItem('word'));
+      if (data[0] === undefined && storageValue) {
+        const wordSet = new Set(storageValue);
         const answerSet = new Set(input);
 
         function checkForMatches(set, subset) {
